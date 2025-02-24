@@ -1,0 +1,147 @@
+.summarize-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #FFFFFF 0%, #F2FCE2 100%);
+  padding: 120px 20px 40px;
+  animation: gradientShift 6s infinite alternate ease-in-out;
+}
+
+@keyframes gradientShift {
+  0% {
+    background: linear-gradient(135deg, #FFFFFF 0%, #F2FCE2 100%);
+  }
+
+  50% {
+    background: linear-gradient(135deg, #F8FFF0 0%, #E8F9DA 100%);
+  }
+
+  100% {
+    background: linear-gradient(135deg, #FFFFFF 0%, #F2FCE2 100%);
+  }
+}
+
+.error-gif{
+  border-radius: 50%;
+}
+.summary-content {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.summary-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.summary-header h1 {
+  font-size: 2.5rem;
+  color: #2d3748;
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.meta-info {
+  background: #F8FAFC;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.meta-info p {
+  margin: 10px 0;
+  color: #4a5568;
+  font-size: 1rem;
+}
+
+.meta-info strong {
+  color: #2d3748;
+  margin-right: 8px;
+}
+
+.summary-content .loading {
+  text-align: center;
+  color: #4a5568;
+  font-size: 1.1rem;
+  padding: 40px 0;
+}
+
+.summary-text {
+  color: #2d3748;
+  line-height: 1.8;
+  font-size: 1.1rem;
+  background: #F8FAFC;
+  padding: 25px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.error-message {
+  background: #FEE2E2;
+  color: #991B1B;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.summary-text {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.summary-text:hover {
+  background: #e2e6ea;
+}
+
+.copy-success {
+  color: green;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.error-gif {
+  width: 50px;
+  height: 50px;
+  display: block;
+  margin: 10px auto;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .summarize-container {
+    padding: 100px 16px 30px;
+  }
+
+  .summary-header h1 {
+    font-size: 2rem;
+  }
+
+  .summary-text {
+    font-size: 1rem;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .summarize-container {
+    padding: 90px 12px 20px;
+  }
+
+  .summary-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .meta-info,
+  .summary-text {
+    padding: 15px;
+  }
+}
