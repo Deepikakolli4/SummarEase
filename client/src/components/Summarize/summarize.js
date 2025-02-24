@@ -6,6 +6,7 @@ import loadingGif from './Ghost.gif';
 import errorGif from './glass.gif';
 import notfound from './Walk.gif';
 const apiUrl = process.env.REACT_APP_API_URL;
+
 const Summarize = () => {
   console.log(apiUrl);
   const location = useLocation();
@@ -22,7 +23,7 @@ const Summarize = () => {
     if (url) {
       setLoading(true);
       axios
-        .post(apiUrl, { url, lang: language })
+        .post(`${apiUrl}/transcript`, { url, lang: language })
         .then((response) => {
           setSummary(response.data.data);
           setLoading(false);
