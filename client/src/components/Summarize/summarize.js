@@ -8,7 +8,7 @@ import notfound from './Walk.gif';
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const Summarize = () => {
-  console.log(apiUrl);
+  // console.log(apiUrl);
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const url = params.get('url');
