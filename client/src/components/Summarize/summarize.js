@@ -23,7 +23,7 @@ const Summarize = () => {
     if (url) {
       setLoading(true);
       axios
-        .post(`${apiUrl}/transcript`, { url, lang: language })
+        .post(`${apiUrl}`, { url, lang: language })
         .then((response) => {
           setSummary(response.data.data);
           setLoading(false);
