@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Deepika",
+  "license": "ISC",
+  "description": "This is the backend for the url-analyzer project",
+  "dependencies": {
+    "@google/generative-ai": "^0.22.0",
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "google-tts-api": "^2.0.2",
+    "nodemon": "^3.1.9",
+    "youtube-transcript": "^1.2.1"
+  }
+}
