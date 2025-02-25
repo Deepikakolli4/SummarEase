@@ -56,10 +56,6 @@ SummarEase is a web application that allows users to summarize video content fro
 - User authentication for personalized summaries.  
 - Export summaries as PDF or text files.  
 
-## License  
-
-This project is licensed under the **MIT License**.  
-
 ## Contributors  
 
 **Deepika Kolli**  
