@@ -48,7 +48,7 @@ SummarEase is a web application that allows users to summarize video content fro
 - **Frontend**: React.js  
 - **Backend**: Node.js, Express.js  
 - **AI Model**: Gemini-API
-- **Other Tools**:  YouTube API for subtitles extraction  
+- **Other Tools**:  Used As Per Requirement
 
 ## Future Enhancements  
 
