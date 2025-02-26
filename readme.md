@@ -1,5 +1,6 @@
 # SummarEase  
 
+
 SummarEase is a web application that allows users to summarize video content from a given URL and translate the summary into their preferred language. The application efficiently extracts subtitles, processes the content using an AI model, and provides a concise summary.  
 
 ## Features  
