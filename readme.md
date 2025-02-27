@@ -3,7 +3,7 @@
 
 SummarEase is a web application that allows users to summarize video content from a given URL and translate the summary into their preferred language. The application efficiently extracts subtitles, processes the content using an AI model, and provides a concise summary. 
 ## Video URL
-[!Demo And Explanation](https://drive.google.com/file/d/1gCU0Ley8Z5RI969KjDsKXiNm567U7dyr/view?usp=sharing)
+[Demo And Explanation](https://drive.google.com/file/d/1gCU0Ley8Z5RI969KjDsKXiNm567U7dyr/view?usp=sharing)
 
 ## Features  
 1. **Accepts a URL and the preferred language for summarization.**  
@@ -52,9 +52,11 @@ SummarEase is a web application that allows users to summarize video content fro
 - **AI Model**: Gemini-API
 - **Other Tools**:  Used As Per Requirement
 
-## DeploymentLinks
-[!Backend](https://summarease-backend-9dfy.vercel.app/)
-[!Complete App](https://vercel.com/kollideepikas-projects/summarease)
+## Deployment Links  
+**TRY THEM HERE**
+[Backend](https://summarease-backend-9dfy.vercel.app/)  
+[Complete App](https://vercel.com/kollideepikas-projects/summarease)
+
 
 
 ## Future Enhancements  
