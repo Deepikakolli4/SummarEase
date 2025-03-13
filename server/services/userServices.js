@@ -18,7 +18,7 @@ const createUser = async ( username ,email, password) => {
       throw Error("user already exists");
     }
     const encryptedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ email, password: encryptedPassword });
+    const newUser = new User({ email, username ,password: encryptedPassword });
     newUser.save();
     return newUser;
   } catch (error) {
@@ -41,6 +41,7 @@ const userLogin = async (email, password) => {
 
     const access_token = await utils.generateAccessToken(existingUser);
     const refresh_token = await utils.generateRefreshToken(existingUser);
+    console.log(existingUser+"hello");
 
     return { 
       access_token, 

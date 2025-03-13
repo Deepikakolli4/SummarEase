@@ -40,6 +40,7 @@ const loginUser = async (req, res) => {
         status: 200,
         access_token: user.access_token,
         refresh_token: user.refresh_token,
+        username : user.username,
         message: "user successfully logged in",
       });
     }

@@ -4,6 +4,7 @@ import "./login.css";
 import loginGif from "./login.gif";
 import doneGif from "./done.gif";
 import walkGif from "./Walk.gif";
+import { useAuth } from '../../contexts/AuthContex';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -15,6 +16,7 @@ const Login = () => {
   const [success, setSuccess] = useState(false);
   const [hasError, setHasError] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,15 +31,15 @@ const Login = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
         });
-  
+
         const data = await response.json();
         setLoading(false);
-  
+
         if (response.ok) {
           setSuccess(true);
-          localStorage.setItem("username", data.username); 
-          localStorage.setItem("accessToken", data.access_token); // ✅ Store token
-          setTimeout(() => navigate("/home"), 2000); 
+          localStorage.setItem("username",data.username);
+          login(data); // Use the context login function
+          setTimeout(() => navigate("/home"), 2000);
         } else {
           setError(data.message || "Invalid credentials");
           setHasError(true);
@@ -48,7 +50,7 @@ const Login = () => {
         setHasError(true);
       }
     }, 1000);
-  };  
+  };
 
   return (
     <div className="login">
