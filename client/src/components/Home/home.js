@@ -10,8 +10,6 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Navigate to the summarize page with query parameters
     navigate(`/summarize?url=${encodeURIComponent(url)}&language=${encodeURIComponent(language)}`);
   };
 

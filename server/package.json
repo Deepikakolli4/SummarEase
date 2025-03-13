@@ -13,11 +13,16 @@
   "dependencies": {
     "@google/generative-ai": "^0.22.0",
     "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
     "cheerio": "^1.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "google-tts-api": "^2.0.2",
+    "mongoose": "^8.12.1",
+    "http": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.11.0",
     "nodemon": "^3.1.9",
     "youtube-transcript": "^1.2.1"
   }
