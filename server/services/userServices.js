@@ -1,9 +1,6 @@
 const User = require("../schema/userSchema");
 const bcrypt = require("bcrypt");
 const utils = require("../utils/util");
-const nodemailer = require("nodemailer");
-
-let verificationCodes = {}; 
 
 const getUsers = async (username, email, password) => {
   try {
