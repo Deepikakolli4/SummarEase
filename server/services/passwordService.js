@@ -18,13 +18,13 @@ const sendVerificationCode = async (email) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "your-email@gmail.com",
-      pass: "your-email-password",
+      user: "kollideepika4@gmail.com",
+      pass: "qwod volt yxds xzag",
     },
   });
 
   await transporter.sendMail({
-    from: "your-email@gmail.com",
+    from: "kollideepika4@gmail.com",
     to: email,
     subject: "Password Reset Code",
     text: `Your verification code is: ${code}`,

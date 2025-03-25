@@ -1,5 +1,5 @@
 const UserService = require("../services/userServices");
-
+const passwordService = require("../services/passwordService");
 const createUser = async (req, res) => {
   try {
     const { username , email, password } = req.body;
