@@ -31,13 +31,13 @@ const Login = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
         });
-
+  
         const data = await response.json();
         setLoading(false);
-
+  
         if (response.ok) {
           setSuccess(true);
-          localStorage.setItem("username",data.username);
+          localStorage.setItem("username", data.username);
           login(data); // Use the context login function
           setTimeout(() => navigate("/home"), 2000);
         } else {
@@ -50,7 +50,7 @@ const Login = () => {
         setHasError(true);
       }
     }, 1000);
-  };
+  };  
 
   return (
     <div className="login">

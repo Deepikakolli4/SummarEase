@@ -63,12 +63,27 @@ const forgotPassword = async (req, res) => {
 const verifyCode = async (req, res) => {
   try {
     const { email, code } = req.body;
+
+    if (!email || !code) {
+      return res.status(400).json({ message: "Email and code are required" });
+    }
+
+    console.log("Received email:", email);
+    console.log("Received code:", code);
+
     const response = await passwordService.verifyUserCode(email, code);
-    res.json(response);
+
+    if (!response) {
+      return res.status(400).json({ message: "Invalid verification code" });
+    }
+
+    res.json({ success: true, message: "Code verified successfully" });
   } catch (error) {
     console.error("Code Verification Error:", error);
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ message: error.message || "Verification failed" });
   }
 };
+
+
 
 module.exports = { createUser, getUser, loginUser, forgotPassword, verifyCode };

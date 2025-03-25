@@ -36,7 +36,7 @@ const sendVerificationCode = async (email) => {
 // Verify the received code
 const verifyUserCode = async (email, code) => {
   if (verificationCodes[email] && verificationCodes[email] == code) {
-    delete verificationCodes[email]; // Remove code after verification
+    delete verificationCodes[email];
     return { success: true, message: "Code verified successfully" };
   } else {
     throw new Error("Invalid verification code");
