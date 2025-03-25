@@ -11,16 +11,16 @@ const sendVerificationCode = async (email) => {
     throw new Error("User not found");
   }
 
-  const code = Math.floor(100000 + Math.random() * 900000); // Generate 6-digit OTP
+  const code = Math.floor(100000 + Math.random() * 900000); 
   verificationCodes[email] = code;
 
   // Configure email transporter
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
+  var transporter = nodemailer.createTransport({
+    service : "gmail",
     auth: {
       user: "kollideepika4@gmail.com",
-      pass: "qwod volt yxds xzag",
-    },
+      pass: "kmtg eqrd ybng pgte",
+     },
   });
 
   await transporter.sendMail({

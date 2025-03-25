@@ -14,7 +14,7 @@ const ForgotPassword = () => {
   const handleSendCode = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${apiUrl}/user/forgot-password`, { email });
+      const res = await axios.post(`${apiUrl}/user/forgotpassword`, { email });
       setMessage(res.data.message);
       setStep(2);
     } catch (err) {
@@ -27,7 +27,7 @@ const ForgotPassword = () => {
     try {
       const res = await axios.post(`${apiUrl}/user/verify-code`, { email, code });
       if (res.data.success) {
-        navigate("/login");
+        navigate("/home");
       } else {
         setError("Invalid verification code.");
       }
