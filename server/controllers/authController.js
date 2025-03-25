@@ -48,5 +48,27 @@ const loginUser = async (req, res) => {
     return res.status(400).json({ status: 400, message: error.message });
   }
 };
+const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const response = await passwordService.sendVerificationCode(email);
+    res.json(response);
+  } catch (error) {
+    console.error("Forgot Password Error:", error);
+    res.status(400).json({ message: error.message });
+  }
+};
 
-module.exports = { createUser, getUser, loginUser };
+// Verify Code
+const verifyCode = async (req, res) => {
+  try {
+    const { email, code } = req.body;
+    const response = await passwordService.verifyUserCode(email, code);
+    res.json(response);
+  } catch (error) {
+    console.error("Code Verification Error:", error);
+    res.status(400).json({ message: error.message });
+  }
+};
+
+module.exports = { createUser, getUser, loginUser, forgotPassword, verifyCode };

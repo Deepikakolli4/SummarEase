@@ -9,7 +9,7 @@ import Login from './components/Login/login';
 import Register from './components/Register/register';
 import { AuthProvider } from './contexts/AuthContex';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-
+import ForgotPassword from './components/ForgotPassWord/forgotpassword';
 function App() {
   return (
     <Router>
@@ -30,6 +30,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
           </Routes>
         </div>
       </AuthProvider>
