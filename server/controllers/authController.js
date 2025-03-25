@@ -62,7 +62,7 @@ const forgotPassword = async (req, res) => {
 // Verify Code
 const verifyCode = async (req, res) => {
   try {
-    const { email, code } = req.body;
+    const { email, code, newPassword } = req.body;
 
     if (!email || !code) {
       return res.status(400).json({ message: "Email and code are required" });
@@ -77,13 +77,18 @@ const verifyCode = async (req, res) => {
       return res.status(400).json({ message: "Invalid verification code" });
     }
 
+    // If newPassword is provided, update password
+    if (newPassword) {
+      await passwordService.updatePassword(email, newPassword);
+      return res.json({ success: true, message: "Password updated successfully" });
+    }
+
     res.json({ success: true, message: "Code verified successfully" });
   } catch (error) {
     console.error("Code Verification Error:", error);
     res.status(400).json({ message: error.message || "Verification failed" });
   }
 };
-
 
 
 module.exports = { createUser, getUser, loginUser, forgotPassword, verifyCode };
