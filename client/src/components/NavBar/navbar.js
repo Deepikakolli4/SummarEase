@@ -8,7 +8,7 @@ const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { username, isLoggedIn, logout } = useAuth();
+  const { user, username, isLoggedIn, logout } = useAuth(); // Get user and username
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +21,7 @@ const NavBar = () => {
 
   const handleLogout = () => {
     logout();
+    navigate("/login");
   };
 
   const handleSummarizeClick = (e) => {
@@ -47,7 +48,11 @@ const NavBar = () => {
           <Link to="/about" className={`nav-link ${location.pathname === "/about" ? "active" : ""}`}>
             About
           </Link>
-          {isLoggedIn && <span className="nav-user">{username}</span>}
+          {isLoggedIn && (
+            <Link to="/userdetails" className="nav-user">
+              {username || "User"}
+            </Link>
+          )}
           {isLoggedIn ? (
             <button onClick={handleLogout} className="nav-link logout-button">
               Logout

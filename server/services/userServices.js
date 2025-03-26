@@ -2,6 +2,7 @@ const User = require("../schema/userSchema");
 const bcrypt = require("bcrypt");
 const utils = require("../utils/util");
 
+// Get All Users
 const getUsers = async (username, email, password) => {
   try {
     const users = await User.find();
@@ -12,6 +13,7 @@ const getUsers = async (username, email, password) => {
   }
 };
 
+// Create a New User
 const createUser = async (username, email, password) => {
   try {
     const existingUser = await User.findOne({ email });
@@ -27,6 +29,7 @@ const createUser = async (username, email, password) => {
   }
 };
 
+// User Login
 const userLogin = async (email, password) => {
   try {
     const existingUser = await User.findOne({ email });
@@ -55,4 +58,28 @@ const userLogin = async (email, password) => {
   }
 };
 
-module.exports = { getUsers, createUser, userLogin};
+const getUserByUsername = async (username) => {
+  try {
+    console.log("Fetching user:", username);
+    const user = await User.findOne({ username }).select("username email");
+    if (!user) throw new Error("User not found");
+    return user;
+  } catch (error) {
+    console.error("Error fetching user:", error.message);
+    throw error;
+  }
+};
+
+const getUserHistory = async (username) => {
+  try {
+    console.log("Fetching user history for:", username);
+    const user = await User.findOne({ username }).select("history");
+    return user?.history || [];
+  } catch (error) {
+    console.error("Error fetching user history:", error.message);
+    throw error;
+  }
+};
+
+
+module.exports = { getUsers, createUser, userLogin, getUserByUsername, getUserHistory };

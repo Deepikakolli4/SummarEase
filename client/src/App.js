@@ -10,6 +10,7 @@ import Register from './components/Register/register';
 import { AuthProvider } from './contexts/AuthContex';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import ForgotPassword from './components/ForgotPassWord/forgotpassword';
+import UserDetails from './components/UserDetails/userDetails';
 function App() {
   return (
     <Router>
@@ -31,6 +32,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path = "/userdetails" element= { <UserDetails />} />
           </Routes>
         </div>
       </AuthProvider>
