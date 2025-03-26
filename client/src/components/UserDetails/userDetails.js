@@ -13,7 +13,6 @@ const UserDetails = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-       
         const token = localStorage.getItem("authToken") || sessionStorage.getItem("authToken");
 
         if (!token) {
@@ -22,14 +21,21 @@ const UserDetails = () => {
           return;
         }
 
-       
-        const response = await axios.get(`${apiUrl}/user/userdetails`, {
+        const username = "exampleUsername"; // Replace with actual username logic
+
+        const response = await axios.post(`${apiUrl}/user/userdetails`, {
+          username: username
+        }, {
           headers: {
             Authorization: `Bearer ${token}`, 
           },
         });
 
-        setUser(response.data.user);
+        // Ensure the response data matches the frontend component structure
+        setUser({
+          username: response.data.user.username,
+          email: response.data.user.email,
+        });
         setHistory(response.data.history || []);
       } catch (err) {
         setError("Failed to fetch user details");

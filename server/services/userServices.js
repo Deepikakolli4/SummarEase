@@ -81,5 +81,4 @@ const getUserHistory = async (username) => {
   }
 };
 
-
 module.exports = { getUsers, createUser, userLogin, getUserByUsername, getUserHistory };
