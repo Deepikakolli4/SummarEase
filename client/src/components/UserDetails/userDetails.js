@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./userDetails.css";
+import { useAuth } from '../../contexts/AuthContex';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -9,6 +10,7 @@ const UserDetails = () => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { username } = useAuth(); // Get username from context
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -21,10 +23,8 @@ const UserDetails = () => {
           return;
         }
 
-        const username = "exampleUsername"; // Replace with actual username logic
-
         const response = await axios.post(`${apiUrl}/user/userdetails`, {
-          username: username
+          username: username 
         }, {
           headers: {
             Authorization: `Bearer ${token}`, 
@@ -33,7 +33,6 @@ const UserDetails = () => {
 
         console.log("Response data:", response.data);
 
-        // Ensure the response data matches the frontend component structure
         setUser({
           username: response.data.user.username,
           email: response.data.user.email,
@@ -48,7 +47,7 @@ const UserDetails = () => {
     };
 
     fetchUserDetails();
-  }, []);
+  }, [username]); // Add username as a dependency
 
   if (loading) return <p>Loading user details...</p>;
   if (error) return <p className="error">{error}</p>;
