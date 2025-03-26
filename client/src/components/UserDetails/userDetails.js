@@ -31,6 +31,8 @@ const UserDetails = () => {
           },
         });
 
+        console.log("Response data:", response.data);
+
         // Ensure the response data matches the frontend component structure
         setUser({
           username: response.data.user.username,

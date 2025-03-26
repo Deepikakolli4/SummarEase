@@ -63,6 +63,7 @@ const getUserByUsername = async (username) => {
     console.log("Fetching user:", username);
     const user = await User.findOne({ username }).select("username email");
     if (!user) throw new Error("User not found");
+    console.log("Fetched user:", user);
     return user;
   } catch (error) {
     console.error("Error fetching user:", error.message);
@@ -74,6 +75,7 @@ const getUserHistory = async (username) => {
   try {
     console.log("Fetching user history for:", username);
     const user = await User.findOne({ username }).select("history");
+    console.log("Fetched user history:", user?.history);
     return user?.history || [];
   } catch (error) {
     console.error("Error fetching user history:", error.message);

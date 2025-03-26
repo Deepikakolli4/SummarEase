@@ -104,6 +104,8 @@ const userDetails = async (req, res) => {
 
     const history = await UserService.getUserHistory(username); 
 
+    console.log("Fetched user details:", { user, history });
+
     return res.status(200).json({
       status: 200,
       user: {
