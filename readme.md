@@ -46,7 +46,9 @@ server/src/
 
 Prerequisites: Node.js and npm.
 
-Create `server/.env` with `DB_URL`, `API_KEY`, `ACCESS_TOKEN_SECRET`, and `REFRESH_TOKEN_SECRET`. Do not commit credentials. Create `client/.env` with `REACT_APP_API_URL=http://localhost:8000`.
+Create `server/.env` with `DB_URL`, `API_KEY`, `ACCESS_TOKEN_SECRET`, and `REFRESH_TOKEN_SECRET`. Do not commit credentials. For local client development, copy `client/.env.example` to `client/.env`.
+
+For deployment, set `REACT_APP_API_URL` in the frontend host's build environment to the deployed backend URL (for example, `https://summarease-ps20.onrender.com`) and redeploy the client. This value is embedded at build time.
 
 Install and start the backend in one terminal:
 
