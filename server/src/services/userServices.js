@@ -141,10 +141,21 @@ const addUserHistory = async (userId, entry) => {
 };
 
 const deleteUserHistoryEntry = async (userId, historyId) => {
-  return User.findByIdAndUpdate(
-    userId,
-    { $pull: { history: { _id: historyId } } },
-    { new: true }
+  return User.findOneAndUpdate(
+    {
+      _id: userId,
+      "history._id": historyId,
+    },
+    {
+      $pull: {
+        history: {
+          _id: new mongoose.Types.ObjectId(historyId),
+        },
+      },
+    },
+    {
+      new: true,
+    }
   ).select("_id");
 };
 
