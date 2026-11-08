@@ -1,5 +1,26 @@
 .App {
   text-align: center;
+  margin-left: 0;
+}
+
+@media (min-width: 769px) {
+  .App .content-wrapper {
+    padding-top: 132px;
+  }
+
+  .App .summarize-container {
+    padding-top: 144px;
+  }
+
+  .App .forgot-password {
+    padding-top: 124px;
+  }
+}
+
+@media (max-width: 768px) {
+  .App {
+    margin-left: 0;
+  }
 }
 
 .App-logo {
@@ -25,7 +46,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #3567ad;
 }
 
 @keyframes App-logo-spin {

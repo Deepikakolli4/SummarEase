@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# SummarEase Client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The React frontend for SummarEase. Route-level screens live in `src/pages`, reusable UI is in `src/components`, authentication state is in `src/contexts`, and shared API utilities are in `src/utils`.
+
+## Local Setup
+
+Install dependencies from this directory with `npm install`. Set `REACT_APP_API_URL=http://localhost:8000` in a `client/.env` file and start the backend separately from the `server` directory.
 
 ## Available Scripts
 
