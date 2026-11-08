@@ -45,6 +45,7 @@ const isYouTubeUrl = (input) => {
 };
 
 const getTranscript = async (req, res) => {
+    let analysisStage = "source retrieval";
     try {
         const { url, lang = "en" } = req.body;
 
@@ -67,7 +68,13 @@ const getTranscript = async (req, res) => {
         let contentKind;
 
         if (sourceType === "video") {
-            const response = await YoutubeTranscript.fetchTranscript(videoId);
+            let response;
+            try {
+                response = await YoutubeTranscript.fetchTranscript(videoId);
+            } catch (error) {
+                console.error("YouTube transcript retrieval failed:", error.message);
+                return res.status(502).json({ error: "Could not retrieve captions for this video. Check that captions are available and try again." });
+            }
             if (!response || response.length === 0) {
                 return res.status(404).json({ status: 404, message: "Transcript not found" });
             }
@@ -79,19 +86,27 @@ const getTranscript = async (req, res) => {
             contentKind = "article";
         }
 
+        analysisStage = "Gemini summarization";
         const summarizedText = await summarizeTranscript(sourceText, lang, contentKind);
 
         if (!summarizedText || summarizedText === "Summary generation failed.") {
-            return res.status(502).json({ error: "Failed to generate summary" });
+            return res.status(502).json({ error: "Gemini returned an empty summary. Check model availability and request limits." });
         }
 
-        const user = await UserService.addUserHistory(req.userId, {
-            url,
-            sourceType,
-            language: lang,
-            summary: summarizedText,
-            createdAt: new Date(),
-        });
+        analysisStage = "history save";
+        let user;
+        try {
+            user = await UserService.addUserHistory(req.userId, {
+                url,
+                sourceType,
+                language: lang,
+                summary: summarizedText,
+                createdAt: new Date(),
+            });
+        } catch (error) {
+            console.error("History save failed:", error);
+            return res.status(500).json({ error: "Summary created, but could not save it to your history." });
+        }
 
         if (!user) {
             return res.status(404).json({ error: "User not found" });
@@ -99,9 +114,10 @@ const getTranscript = async (req, res) => {
 
         return res.status(200).json({ data: summarizedText })
     } catch (error) {
-        console.error('Error generating summary:', error);
+        console.error(`Analyze failed during ${analysisStage}:`, error);
         const statusCode = error.statusCode || 500;
-        return res.status(statusCode).json({ error: error.statusCode ? error.message : 'Failed to generate summary' });
+        const message = error.publicMessage || (error.statusCode ? error.message : `${analysisStage} failed. Check the server logs for details.`);
+        return res.status(statusCode).json({ error: message });
     }
 }
 
@@ -109,6 +125,9 @@ const summarizeTranscript = async (sourceText, lang, sourceType = "content") => 
     try {
         if (!sourceText) {
             throw new Error("Cannot find source text");
+        }
+        if (!API_KEY) {
+            throw Object.assign(new Error("Gemini API key is not configured on the server."), { statusCode: 503 });
         }
 
         const prompt = [
@@ -132,18 +151,33 @@ const summarizeTranscript = async (sourceText, lang, sourceType = "content") => 
             })
         });
 
-        const data = await response.json();
+        const data = await response.json().catch(() => null);
+
+        if (!response.ok) {
+            console.error("Gemini API error response:", response.status, data);
+            throw Object.assign(
+                new Error(data?.error?.message || `Gemini API returned HTTP ${response.status}`),
+                { statusCode: 502, publicMessage: `Gemini rejected the request (HTTP ${response.status}). Check the deployed model access, API quota, and Render environment.` }
+            );
+        }
 
         if (!data || !data.candidates || data.candidates.length === 0) {
             console.error("Gemini API Error:", data);
-            throw new Error("Failed to generate summary");
+            throw Object.assign(
+                new Error("Gemini returned no candidates"),
+                { statusCode: 502, publicMessage: "Gemini returned no summary. Check model availability, content restrictions, and API quota." }
+            );
         }
 
         return data.candidates[0].content.parts[0].text.trim();
 
     } catch (error) {
         console.error("Error summarizing transcript:", error.message);
-        return "Summary generation failed.";
+        if (error.statusCode) throw error;
+        throw Object.assign(
+            new Error(error.message),
+            { statusCode: 502, publicMessage: "Could not connect to Gemini. Check the Render server network and API availability." }
+        );
     }
 };
 
