@@ -26,29 +26,6 @@ app.get('/', function(req,res){
 })
 
 app.use('/transcript', analyzerRouter);
-app.post('/test-transcript', async (req, res) => {
-    const { url } = req.body;
-
-    console.log("🔍 Testing transcript for URL:", url);
-
-    try {
-        const response = await YoutubeTranscript.fetchTranscript(url)
-            .then(r => {
-                console.log("✅ TRANSCRIPT SUCCESS:", r);
-                return r;
-            })
-            .catch(err => {
-                console.log("❌ TRANSCRIPT ERROR:", err);
-                return [];
-            });
-
-        return res.json({ transcript: response });
-
-    } catch (err) {
-        console.log("💥 TEST ROUTE ERROR:", err);
-        return res.status(500).json({ error: err.message });
-    }
-});
 app.use('/user',authRouter)
 
 module.exports = app;
