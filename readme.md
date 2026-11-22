@@ -46,7 +46,7 @@ server/src/
 
 Prerequisites: Node.js and npm.
 
-Create `server/.env` with `DB_URL`, `API_KEY`, `ACCESS_TOKEN_SECRET`, and `REFRESH_TOKEN_SECRET`. Do not commit credentials. For local client development, copy `client/.env.example` to `client/.env`.
+Create `server/.env` with `DB_URL`, `API_KEY`, `ACCESS_TOKEN_SECRET`, and `REFRESH_TOKEN_SECRET`. Do not commit credentials. The client uses `client/.env.development` for local development and `client/.env.production` for production builds. Hosting environment variables named `REACT_APP_API_URL` override these build defaults. Do not commit local `.env` files or server credentials.
 
 For deployment, set `REACT_APP_API_URL` in the frontend host's build environment to the deployed backend URL (for example, `https://summarease-ps20.onrender.com`) and redeploy the client. This value is embedded at build time.
 

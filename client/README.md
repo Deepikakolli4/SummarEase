@@ -4,7 +4,7 @@ The React frontend for SummarEase. Route-level screens live in `src/pages`, reus
 
 ## Local Setup
 
-Install dependencies from this directory with `npm install`. Set `REACT_APP_API_URL=http://localhost:8000` in a `client/.env` file and start the backend separately from the `server` directory.
+Install dependencies from this directory with `npm install`. The client uses `client/.env.development` for `npm start` (localhost) and `client/.env.production` for production builds (deployed API). A hosting environment variable named `REACT_APP_API_URL` overrides the production file. Start the backend separately from the `server` directory.
 
 ## Available Scripts
 

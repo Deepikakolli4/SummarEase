@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const { YoutubeTranscript } = require("youtube-transcript");
 
 const bodyParser = require('body-parser');
 const analyzerRouter = require('./routes/analyzerRoutes');
