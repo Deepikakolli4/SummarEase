@@ -4,8 +4,7 @@ import "./login.css";
 import loginGif from "./login.gif";
 import { useAuth } from '../../contexts/AuthContext';
 import PasswordInput from '../../components/common/PasswordInput';
-
-const apiUrl = process.env.REACT_APP_API_URL;
+import { loginUser } from '../../services/api';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,26 +22,16 @@ const Login = () => {
 
     setTimeout(async () => {
       try {
-        const response = await fetch(`${apiUrl}/user/login`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
-        });
-
-        const data = await response.json();
+        const response = await loginUser({ email, password });
+        const data = response.data;
         setLoading(false);
-
-        if (response.ok) {
-          setSuccess(true);
-          localStorage.setItem("username", data.username);
-          login(data);
-          navigate("/analyze");
-        } else {
-          setError(data.message || "Invalid credentials");
-        }
-      } catch {
+        setSuccess(true);
+        localStorage.setItem("username", data.username);
+        login(data);
+        navigate("/analyze");
+      } catch (err) {
         setLoading(false);
-        setError("Something went wrong. Please try again.");
+        setError(err.response?.data?.message || "Invalid credentials");
       }
     }, 1000);
   };

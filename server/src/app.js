@@ -25,7 +25,7 @@ app.get('/', function(req,res){
     res.send("Hello world")
 })
 
-app.use('/transcript', analyzerRouter);
+app.use(['/analyze', '/transcript'], analyzerRouter);
 app.use('/user',authRouter)
 
 module.exports = app;

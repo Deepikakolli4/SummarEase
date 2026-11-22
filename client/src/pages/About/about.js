@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../infoPages.css';
+import '../../components/common/infoPages.css';
 
 const aboutSections = [
   {

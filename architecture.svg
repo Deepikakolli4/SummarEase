@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="940" viewBox="0 0 1500 940" role="img" aria-labelledby="title desc">
+<title id="title">SummarEase — simple system architecture</title>
+<desc id="desc">A simplified view of the user, React frontend, Express backend, external content and AI services, and MongoDB.</desc>
+<defs>
+ <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#f7f9fc"/></linearGradient>
+ <filter id="shadow" x="-10%" y="-10%" width="120%" height="125%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#23384f" flood-opacity=".09"/></filter>
+ <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5 0 10z" fill="#607487"/></marker>
+ <style>
+ text{font-family:Inter,'Segoe UI',Arial,sans-serif;fill:#1c2935}.title{font-size:37px;font-weight:750}.subtitle{font-size:17px;fill:#677789}.head{font-size:20px;font-weight:740}.body{font-size:14px;fill:#445565}.small{font-size:12px;fill:#687889}.label{font-size:11px;font-weight:750;letter-spacing:1px}.flowHead{font-size:15px;font-weight:720}.flow{font-size:13px;fill:#405363}
+ </style>
+</defs>
+<rect width="1500" height="940" fill="url(#bg)"/>
+<text x="750" y="68" text-anchor="middle" class="title">SummarEase System Architecture</text>
+<text x="750" y="99" text-anchor="middle" class="subtitle">A simple view of how a link becomes a saved summary</text>
+<!-- four main components -->
+<g filter="url(#shadow)"><rect x="55" y="177" width="245" height="335" rx="18" fill="#f0faeb" stroke="#c6e8b5"/></g>
+<text x="177" y="218" text-anchor="middle" class="head">User</text>
+<circle cx="177" cy="278" r="27" fill="#d9efce"/><circle cx="177" cy="269" r="8" fill="#397148"/><path d="M160 294c2-12 11-17 17-17s15 5 17 17" fill="none" stroke="#397148" stroke-width="6" stroke-linecap="round"/>
+<text x="177" y="338" text-anchor="middle" class="body">Uses a web browser</text><text x="177" y="369" text-anchor="middle" class="small">Signs in · submits a URL</text><text x="177" y="390" text-anchor="middle" class="small">Chooses summary language</text><text x="177" y="411" text-anchor="middle" class="small">Views saved summaries</text>
+<rect x="83" y="449" width="189" height="37" rx="18" fill="#fff" stroke="#d6e9cd"/><text x="177" y="473" text-anchor="middle" class="label" fill="#477b47">BROWSER</text>
+<g filter="url(#shadow)"><rect x="365" y="177" width="300" height="335" rx="18" fill="#edf7ff" stroke="#b8ddfa"/></g>
+<text x="515" y="218" text-anchor="middle" class="head">React frontend</text><text x="515" y="247" text-anchor="middle" class="small">React Router · Axios</text>
+<rect x="393" y="276" width="244" height="58" rx="10" fill="#fff" stroke="#d1e6f6"/><text x="515" y="301" text-anchor="middle" class="body">Screens</text><text x="515" y="321" text-anchor="middle" class="small">Analyze · Login · History</text>
+<rect x="393" y="346" width="244" height="58" rx="10" fill="#fff" stroke="#d1e6f6"/><text x="515" y="371" text-anchor="middle" class="body">Sign-in state</text><text x="515" y="391" text-anchor="middle" class="small">Protected pages · saved tokens</text>
+<rect x="393" y="416" width="244" height="68" rx="10" fill="#fff" stroke="#d1e6f6"/><text x="515" y="442" text-anchor="middle" class="body">API client</text><text x="515" y="464" text-anchor="middle" class="small">Adds token · refreshes on expiry</text>
+<g filter="url(#shadow)"><rect x="730" y="151" width="405" height="390" rx="18" fill="#f0f8ea" stroke="#c5e1b4"/></g>
+<text x="932" y="192" text-anchor="middle" class="head">Express backend</text><text x="932" y="220" text-anchor="middle" class="small">Node.js · REST API</text>
+<rect x="760" y="246" width="345" height="63" rx="10" fill="#fff" stroke="#d7e8cc"/><text x="782" y="271" class="label" fill="#4e7a3d">1 · ROUTES &amp; AUTH</text><text x="782" y="293" class="small">Direct requests; verify JWT where required</text>
+<path d="M932 310V321" stroke="#829381" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="760" y="326" width="345" height="63" rx="10" fill="#fff" stroke="#d7e8cc"/><text x="782" y="351" class="label" fill="#4e7a3d">2 · CONTROLLERS</text><text x="782" y="373" class="small">Validate input; coordinate the request</text>
+<path d="M932 390V401" stroke="#829381" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="760" y="406" width="345" height="58" rx="10" fill="#fff" stroke="#d7e8cc"/><text x="782" y="431" class="label" fill="#4e7a3d">3 · SERVICES</text><text x="782" y="453" class="small">Retrieve content · summarize · manage accounts</text>
+<path d="M932 465V476" stroke="#829381" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="760" y="481" width="345" height="43" rx="10" fill="#fff" stroke="#d7e8cc"/><text x="782" y="508" class="small">4 · Mongoose model reads and writes user data</text>
+<g filter="url(#shadow)"><rect x="1200" y="177" width="245" height="335" rx="18" fill="#f5f1ff" stroke="#d5c8fa"/></g>
+<text x="1322" y="218" text-anchor="middle" class="head">External services</text>
+<rect x="1224" y="250" width="197" height="55" rx="9" fill="#fff" stroke="#e3daf8"/><text x="1322" y="274" text-anchor="middle" class="body">Transcript API</text><text x="1322" y="293" text-anchor="middle" class="small">YouTube captions</text>
+<rect x="1224" y="316" width="197" height="55" rx="9" fill="#fff" stroke="#e3daf8"/><text x="1322" y="340" text-anchor="middle" class="body">Article pages</text><text x="1322" y="359" text-anchor="middle" class="small">Public HTML text</text>
+<rect x="1224" y="382" width="197" height="55" rx="9" fill="#fff" stroke="#e3daf8"/><text x="1322" y="406" text-anchor="middle" class="body">Google Gemini</text><text x="1322" y="425" text-anchor="middle" class="small">Writes the summary</text>
+<rect x="1224" y="448" width="197" height="42" rx="9" fill="#fff" stroke="#e3daf8"/><text x="1322" y="474" text-anchor="middle" class="small">Gmail · reset codes</text>
+<!-- simple primary connections -->
+<path d="M300 344H355" stroke="#607487" stroke-width="2.5" marker-end="url(#arrow)"/><text x="327" y="328" text-anchor="middle" class="small">uses</text>
+<path d="M665 344H720" stroke="#607487" stroke-width="2.5" marker-end="url(#arrow)"/><text x="692" y="328" text-anchor="middle" class="small">HTTPS / JSON</text>
+<path d="M1135 344H1190" stroke="#607487" stroke-width="2.5" marker-end="url(#arrow)"/><text x="1162" y="328" text-anchor="middle" class="small">calls</text>
+<!-- database kept below main flow -->
+<g filter="url(#shadow)"><rect x="730" y="585" width="405" height="115" rx="16" fill="#f4f0ff" stroke="#d5c8fa"/></g>
+<text x="932" y="621" text-anchor="middle" class="head">MongoDB</text><text x="932" y="649" text-anchor="middle" class="body">User accounts · saved summaries</text><text x="932" y="674" text-anchor="middle" class="small">Mongoose · DB_URL · collection: user_details</text>
+<path d="M932 541V576" stroke="#607487" stroke-width="2.5" marker-end="url(#arrow)"/><text x="951" y="564" class="small">stores / loads</text>
+<!-- two simple flows -->
+<rect x="55" y="754" width="1390" height="88" rx="15" fill="#fff" stroke="#dce4ed"/>
+<text x="82" y="783" class="label" fill="#4e7a3d">SUMMARY FLOW</text>
+<text x="82" y="816" class="flowHead">URL</text><path d="M133 811H175" stroke="#91a0ae" stroke-width="1.8" marker-end="url(#arrow)"/><text x="193" y="816" class="flow">retrieve transcript or article</text><path d="M385 811H427" stroke="#91a0ae" stroke-width="1.8" marker-end="url(#arrow)"/><text x="445" y="816" class="flow">Gemini writes summary</text><path d="M601 811H643" stroke="#91a0ae" stroke-width="1.8" marker-end="url(#arrow)"/><text x="661" y="816" class="flow">save to MongoDB</text><path d="M786 811H828" stroke="#91a0ae" stroke-width="1.8" marker-end="url(#arrow)"/><text x="846" y="816" class="flow">show in React</text>
+<rect x="55" y="859" width="1390" height="54" rx="14" fill="#f2f7fb" stroke="#dce4ed"/><text x="82" y="892" class="label" fill="#536b80">ACCOUNT &amp; HISTORY</text><text x="280" y="892" class="flow">JWT protects private API requests</text><circle cx="531" cy="886" r="3" fill="#93a2b2"/><text x="552" y="892" class="flow">MongoDB stores account and history</text><circle cx="827" cy="886" r="3" fill="#93a2b2"/><text x="848" y="892" class="flow">Nodemailer emails reset codes</text>
+<text x="750" y="931" text-anchor="middle" class="small">Secrets are configured on the server; the client receives only its API base URL.</text>
+</svg>

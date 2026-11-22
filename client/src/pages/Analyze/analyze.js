@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import apiClient from '../../utils/apiClient';
-import './summarize.css';
+import { analyzeUrl } from '../../services/api';
+import './analyze.css';
 import loadingGif from './Ghost.gif';
 import errorGif from './glass.gif';
 
-const Summarize = () => {
+const Analyze = () => {
   const [url, setUrl] = useState('');
   const [sourceType, setSourceType] = useState('video');
   const [language, setLanguage] = useState('English');
@@ -21,7 +21,7 @@ const Summarize = () => {
     setCopySuccess('');
 
     try {
-      const response = await apiClient.post('/transcript', { url, lang: language, sourceType });
+      const response = await analyzeUrl({ url, lang: language, sourceType });
       setSummary(response.data.data);
     } catch (requestError) {
       setError(requestError.response?.data?.message || requestError.response?.data?.error || 'Failed to generate summary. Please try again.');
@@ -132,4 +132,4 @@ const Summarize = () => {
   );
 };
 
-export default Summarize;
+export default Analyze;

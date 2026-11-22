@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import apiClient from "../../utils/apiClient";
+import { getHistory, deleteHistoryItem } from "../../services/api";
 import { Link } from "react-router-dom";
 import "./history.css";
 
-const UserDetails = () => {
+const History = () => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -31,15 +31,13 @@ const UserDetails = () => {
       };
     }
 
-    apiClient.get("/user/history", {
-      params: {
-        page,
-        limit: pagination.limit,
-        ...(filters.from && { from: filters.from }),
-        ...(filters.to && { to: filters.to }),
-        ...(filters.language && { language: filters.language }),
-        ...(filters.type && { type: filters.type }),
-      },
+    getHistory({
+      page,
+      limit: pagination.limit,
+      ...(filters.from && { from: filters.from }),
+      ...(filters.to && { to: filters.to }),
+      ...(filters.language && { language: filters.language }),
+      ...(filters.type && { type: filters.type }),
     }).then((response) => {
       if (active) {
         setHistory(response.data.data || []);
@@ -91,7 +89,7 @@ const UserDetails = () => {
     setDeletingId(item._id);
     setFeedback("");
     try {
-      await apiClient.delete(`/user/history/${item._id}`);
+      await deleteHistoryItem(item._id);
       setHistory((currentHistory) => currentHistory.filter((entry) => entry._id !== item._id));
       setPagination((currentPagination) => {
         const total = Math.max(0, currentPagination.total - 1);
@@ -242,4 +240,4 @@ const UserDetails = () => {
   );
 };
 
-export default UserDetails;
+export default History;

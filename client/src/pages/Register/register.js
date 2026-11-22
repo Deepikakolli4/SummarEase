@@ -3,8 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './register.css';
 import register from './register.gif';
 import PasswordInput from '../../components/common/PasswordInput';
-
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // Fallback URL for local development
+import { registerUser } from '../../services/api';
 
 const Register = () => {
   const [username, setUserName] = useState('');
@@ -34,26 +33,15 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(`${apiUrl}/user`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, email, password })
-      });
-
-      const data = await response.json();
+      await registerUser({ username, email, password });
       setLoading(false);
-
-      if (response.ok) {
-        setSuccess(true);
-        setTimeout(() => {
-          navigate('/login');
-        }, 2000);
-      } else {
-        setError(data.message || 'Registration failed');
-      }
-    } catch {
+      setSuccess(true);
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+    } catch (err) {
       setLoading(false);
-      setError('Something went wrong. Please try again.');
+      setError(err.response?.data?.message || 'Registration failed');
     }
   };
 

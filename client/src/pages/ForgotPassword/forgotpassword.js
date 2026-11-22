@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import "./forgotpassword.css";
-
-const apiUrl = process.env.REACT_APP_API_URL;
+import { sendResetCode, verifyResetCode, updatePassword } from "../../services/api";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -19,7 +17,7 @@ const ForgotPassword = () => {
   const handleSendCode = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${apiUrl}/user/forgotpassword`, { email });
+      const res = await sendResetCode(email);
       setMessage(res.data.message);
       setStep(2);
     } catch (err) {
@@ -31,10 +29,8 @@ const ForgotPassword = () => {
   const handleVerifyCode = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${apiUrl}/user/verify-code`, { email, code });
-  
-      console.log("API Response:", res.data); // Log response to debug
-  
+      const res = await verifyResetCode(email, code);
+
       if (res.data.success) {
         setMessage("Code verified! Enter your new password.");
         setStep(3); // Move to password reset step
@@ -42,7 +38,6 @@ const ForgotPassword = () => {
         setError(res.data.message || "Invalid verification code.");
       }
     } catch (err) {
-      console.error("Verification failed:", err.response?.data || err.message);
       setError(err.response?.data?.message || "Verification failed.");
     }
   };
@@ -51,12 +46,7 @@ const ForgotPassword = () => {
   const handleUpdatePassword = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${apiUrl}/user/verify-code`, {
-        email,
-        code,
-        newPassword,
-        isPasswordUpdate: true, // Indicates password update
-      });
+      const res = await updatePassword({ email, code, newPassword });
 
       if (res.data.success) {
         setMessage("Password updated successfully! You can now log in.");

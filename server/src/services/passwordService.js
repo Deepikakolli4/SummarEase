@@ -1,3 +1,4 @@
+require("dotenv").config();
 const bcrypt = require("bcrypt");
 const User = require("../models/userSchema");
 const nodemailer = require("nodemailer");
@@ -15,17 +16,20 @@ const sendVerificationCode = async (email) => {
   const code = Math.floor(100000 + Math.random() * 900000);
   verificationCodes[email] = code;
 
+  const emailUser = process.env.EMAIL_USER;
+  const emailPass = process.env.EMAIL_PASS;
+
   // Configure email transporter
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "kollideepika4@gmail.com",
-      pass: "kmtg eqrd ybng pgte",
+      user: emailUser,
+      pass: emailPass,
     },
   });
 
   await transporter.sendMail({
-    from: "kollideepika4@gmail.com",
+    from: emailUser,
     to: email,
     subject: "Password Reset Code",
     text: `Your verification code is: ${code}`,

@@ -20,7 +20,7 @@ SummarEase summarizes YouTube videos with accessible captions and public blog or
 5. **AI Processing**: The model generates concise bullet points in the selected language.
 6. **Rendering Output**: The result is displayed and saved to the user's database history.
 
-![Flow_Image](./flow.png)
+![SummarEase application architecture](./architecture.svg)
 
 
 
@@ -97,4 +97,3 @@ The client runs at `http://localhost:3000` by default. Build it with `npm run bu
 **Deepika Kolli**  
 
 Contributions are welcome! Feel free to open an issue or submit a pull request.  
-

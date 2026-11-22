@@ -1,18 +1,18 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/home';
-import Summarize from './pages/Analyze/summarize';
+import Analyze from './pages/Analyze/analyze';
 import NavBar from './components/layout/NavBar/navbar';
 import About from './pages/About/about';
-import Features from './pages/Features';
-import HowItWorks from './pages/HowItWorks';
+import Features from './pages/Features/Features';
+import HowItWorks from './pages/HowItWorks/HowItWorks';
 import Login from './pages/Login/login';
 import Register from './pages/Register/register';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/routing/ProtectedRoute/ProtectedRoute';
 import ForgotPassword from './pages/ForgotPassword/forgotpassword';
-import UserDetails from './pages/History/userDetails';
+import History from './pages/History/history';
 function App() {
   return (
     <Router>
@@ -25,20 +25,11 @@ function App() {
             <Route path="/features" element={<Features />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/about" element={<About />} />
-            <Route 
-              path="/analyze"
-              element={
-                <ProtectedRoute>
-                  <Summarize />
-                </ProtectedRoute>
-              } 
-            />
+            <Route path="/analyze" element={<ProtectedRoute><Analyze /></ProtectedRoute>} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
-            <Route path="/history" element={<ProtectedRoute><UserDetails /></ProtectedRoute>} />
-            <Route path="/summarize" element={<Navigate to="/analyze" replace />} />
-            <Route path="/userdetails" element={<Navigate to="/history" replace />} />
+            <Route path="/history" element={<ProtectedRoute><History /></ProtectedRoute>} />
           </Routes>
         </div>
       </AuthProvider>

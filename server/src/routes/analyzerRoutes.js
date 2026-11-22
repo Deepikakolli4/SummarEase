@@ -11,5 +11,5 @@ router.get('/', (_req, res) => {
 	});
 });
 
-router.post('/', requireAuth, userController.getTranscript);
+router.post('/', requireAuth, userController.analyzeUrl);
 module.exports = router;
